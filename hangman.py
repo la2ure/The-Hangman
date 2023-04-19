@@ -66,7 +66,7 @@ def hangman():
       alphabet = set(string.ascii_uppercase)
       used_letters = set() #lettres joueur a proposé
 
-      lives = 7
+      lives = 6
 
       while len(word_letters) > 0 and lives > 0:
         #Message affiché pour les lettres déjà utilisées
