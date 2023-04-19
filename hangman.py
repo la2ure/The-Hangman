@@ -1,10 +1,54 @@
 import pygame
 import os
 
+#Setup display
 pygame.init()
 WIDTH, HEIGHT = 800, 500
-pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Hangman Game')
+win = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('Hangman Game!')
+
+#Load images
+# Boucle sélectionne nos images et les stocke dans la liste imageS
+images = []
+for i in range(7):
+    image = pygame.image.load('images/hangman' + str(i) + '.png')
+    images.append(image)
+
+#Game varialbes
+hangman_status = 5
+
+#colors
+WHITE = (255,255,255)
+
+#Setup game loop
+FPS = 60 #frame per second
+#Clock object qui va count à 60 frames per second qui va keep track of the time
+clock = pygame.time.Clock()
+run = True
+
+#Tant que run est true, on va jouer le jeu. Quand on aura perdu/gagné ça passera à false
+while run : 
+    clock.tick(FPS)
+
+    win.fill(WHITE) #Dessine par dessus le truc précédent/efface
+    win.blit(images[hangman_status], (120,100)) #Blit : Dessine une image/surface -- Donne la position XY où on veut blit l'image
+    pygame.display.update()
+
+  #chaque event qui se déroule stocké dans pygame.event.get
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: #Quand tu cliques sur la croix pour fermer
+            run = False
+        if event.type == pygame.MOUSEBUTTONDOWN: #Get the XY position de la souris sur la fenêtre
+            pos = pygame.mouse.get_pos() #FYI origine XY en haut à gauche
+            print(pos)
+
+pygame.quit()
+
+
+
+    
+    
+
 
 import random
 from word import words
@@ -57,7 +101,5 @@ def hangman():
       else:
         print('You guessed the word', word, '!')
 
-hangman()
-
-
+hangman() 
      
